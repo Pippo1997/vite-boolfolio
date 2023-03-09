@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import ProjectCard from './ProjectCard.vue';
 
 export default {
     name: "PostMain",
@@ -11,6 +12,9 @@ export default {
             currentPage: 1,
             lastPage: null
         }
+    },
+    components:{
+        ProjectCard
     },
     methods: {
         getProjects(project_page){
@@ -46,22 +50,7 @@ export default {
                 <div v-else class="col-12 d-flex flex-wrap justify-content-center">
                     <div class="row">
                         <div class="col-12 col-md-4" v-for="project in projects" :key="project.id">
-                            <div class="card my-3">
-                                <div class="card-body">
-                                    <div class="card-img-top">
-                                        <img class="img-fluid" :src="project.cover_image != null ? `${baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/200/300'">
-                                    </div>
-                                    <div class="card-title py-1">
-                                        <h5>{{project.title}}</h5>
-                                    </div>
-                                    <div class="card-text py-1">
-                                        {{project.content}}
-                                    </div>
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        Leggi l'articolo
-                                    </a>
-                                </div>
-                            </div>
+                            <ProjectCard :project="project" :baseUrl="baseUrl"></ProjectCard>
                         </div>
                     </div>
                     <div class="row">
