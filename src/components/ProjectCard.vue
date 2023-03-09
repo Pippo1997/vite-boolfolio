@@ -12,7 +12,7 @@ export default {
     <div class="card my-3">
         <div class="card-body">
             <div class="card-img-top">
-                <img class="img-fluid" :src="project.cover_image != null ? `${baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/200/300'">
+                <img class="img-fluid" :src="project.cover_image != null ? `${baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/400/200'">
             </div>
             <div class="card-title py-1">
                 <h5>{{project.title}}</h5>
@@ -27,6 +27,8 @@ export default {
     </div>
 </template>
 
-<style lang="">
-    
+<style lang="scss" scoped>
+    .card{
+        height: 550px;
+    }
 </style>
