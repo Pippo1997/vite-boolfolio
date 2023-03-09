@@ -7,16 +7,20 @@ export default {
         return{
             projects: [],
             loading: true,
-            baseUrl: 'http://127.0.0.1:8000'
+            baseUrl: 'http://127.0.0.1:8000',
+            currentPage: 1,
+            lastPage: null
         }
     },
     methods: {
-        getProjects(){
+        getProjects(project_page){
             this.loading = true;
-            axios.get(`${this.baseUrl}/api/projects`).then((response) => {
+            axios.get(`${this.baseUrl}/api/projects`, { params:{ page: project_page}}).then((response) => {
                 if(response.data.success){
-                    this.projects = response.data.results
+                    this.projects = response.data.results.data
                     this.loading = false;
+                    this.currentPage = response.data.results.current_page
+                    this.lastPage = response.data.results.last_page
                 }
                 else{
                     //compare messaggio che dice che non è andato a buon fine
@@ -36,24 +40,51 @@ export default {
                 <div class="col-12">
                     <h2 class="text-center">Vite Boolfolio</h2>
                 </div>
-                <div class="col-12">
-                    <div v-if="loading" class="d-flex justify-content-center">
-                        <div class="loader"></div>
-                    </div>
-                    <div v-else class="d-flex flex-wrap gap-5 justify-content-center">
-                        <div v-for="project in projects" :key="project.id" class="col-3">
+                <div v-if="loading" class="col-12 d-flex justify-content-center">
+                    <div class="loader"></div>
+                </div>
+                <div v-else class="col-12 d-flex flex-wrap justify-content-center">
+                    <div class="row">
+                        <div class="col-12 col-md-4" v-for="project in projects" :key="project.id">
                             <div class="card my-3">
                                 <div class="card-body">
                                     <div class="card-img-top">
-                                        <img :src="project.cover_image != null ? `${baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/200/300'" class="img-fluid">
+                                        <img class="img-fluid" :src="project.cover_image != null ? `${baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/200/300'">
                                     </div>
-                                    <h5 class="card-title">{{project.title}}</h5>
-                                    <p class="card-text">{{project.content}}</p>
+                                    <div class="card-title py-1">
+                                        <h5>{{project.title}}</h5>
+                                    </div>
+                                    <div class="card-text py-1">
+                                        {{project.content}}
+                                    </div>
                                     <a href="#" class="btn btn-sm btn-success">
                                         Leggi l'articolo
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <nav>
+                                <ul class="pagination">
+                                    <li :class="currentPage === 1 ? 'disabled' : 'page-item'">
+                                        <button class="page-link" @click="getProjects(currentPage - 1)">
+                                            Prev
+                                        </button>
+                                    </li>
+                                    <li :class="currentPage === i ? 'disabled' : 'page-item'" v-for="i in lastPage">
+                                        <button class="page-link" @click="getProjects(i)">
+                                            {{ i }}
+                                        </button>
+                                    </li>
+                                    <li :class="currentPage === lastPage ? 'disabled' : 'page-item'">
+                                        <button class="page-link" @click="getProjects(currentPage + 1)">
+                                            Next
+                                        </button>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
