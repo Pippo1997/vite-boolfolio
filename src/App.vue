@@ -1,16 +1,18 @@
 <script>
-import PostMain from './components/PostMain.vue';
+import AppHeader from './components/AppHeader.vue';
+
 export default {
   components:{
-    PostMain
+    AppHeader
   }
 }
 </script>
 
 <template>
-  <PostMain></PostMain>
+  <AppHeader></AppHeader>
+  <router-view></router-view>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+  @use './styles/app.scss' as *;
 </style>
