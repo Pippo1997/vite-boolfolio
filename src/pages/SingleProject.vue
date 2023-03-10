@@ -42,7 +42,7 @@ export default {
                 <div class="card mt-5">
                     <div class="card-img-top">
                         <div class="cover-img">
-                            <img :src="project.cover_image != null ? `${store.baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/400/200'" class="img-fluid">
+                            <img class="img-fluid" :src="project.cover_image != null ? `${store.baseUrl}/storage/${project.cover_image}` : 'https://picsum.photos/400/200'">
                         </div>
                     </div>
                     <div class="card-title mt-3">
