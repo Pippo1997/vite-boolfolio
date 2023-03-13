@@ -9,8 +9,12 @@ export default {
                     routeName: 'homepage',
                 },
                 {
-                    label: 'Blog',
+                    label: 'Projects',
                     routeName: 'project_list',
+                },
+                {
+                    label: 'Contacts',
+                    routeName: 'contacts',
                 }
             ]
         }

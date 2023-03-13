@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage.vue';
 import ProjectList from './pages/ProjectList.vue';
 import SingleProject from './pages/SingleProject.vue';
 import NotFound from './pages/NotFound.vue';
+import Contacts from './pages/Contacts.vue';
+import ThankYou from './pages/ThankYou.vue';
 
 // creiamo oggetto router
 const router = createRouter({
@@ -26,6 +28,16 @@ const router = createRouter({
             path: '/blog/:slug', //con :nome passiamo il parametro per vedere il fettaglio di un articolo,iol nome deve concidere con quello dato in api.php
             name: 'single_project',
             component: SingleProject
+        },
+        {
+            path: '/contacts', 
+            name: 'contacts',
+            component: Contacts
+        },
+        {
+            path: '/thank_you', 
+            name: 'thank_you',
+            component: ThankYou
         },
         //404 not-found
         {

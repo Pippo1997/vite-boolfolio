@@ -20,7 +20,7 @@ export default {
             }
             else{
                 // redirect 404
-                this.$route.push({ name: 'not_found' })
+                this.$router.push({ 'name': 'not_found' })
             }
         })
     }
@@ -35,7 +35,7 @@ export default {
             </div>
             <div class="col-12" v-else>
                 <div class="float-end">
-                    <router-link :to="{ name: 'project_list' }" class="btn btn-sm btn-success">
+                    <router-link :to="{ name: 'project_list' }" class="btn btn-sm btn-success my-2">
                         Torna ai Project
                     </router-link>
                 </div>
